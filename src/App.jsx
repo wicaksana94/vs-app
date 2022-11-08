@@ -30,7 +30,7 @@ function App() {
 
   return (
     <div className="App">
-      <AvatarGroup data={dummyDataFromTheServer} max={3} />
+      <AvatarGroup data={dummyDataFromTheServer} max={3} size="lg" />
     </div>
   );
 }
