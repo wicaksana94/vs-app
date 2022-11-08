@@ -1,5 +1,5 @@
 export default function AvatarGroup(props) {
-  const max = props.max;
+  const max = props.maxLength;
   const total = props.data.total;
   const peopleData = props.data.people.slice(0, max);
   const surplusText = total - max;
