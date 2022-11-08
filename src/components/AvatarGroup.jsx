@@ -4,6 +4,22 @@ export default function AvatarGroup(props) {
   const peopleData = props.data.people.slice(0, max);
   const surplusText = total - max;
 
+  const setSize = () => {
+    switch (props.size) {
+      case "xs":
+        return "h-4 w-4";
+      case "sm":
+        return "h-6 w-6";
+      case "md":
+        return "h-8 w-8";
+      case "lg":
+        return "h-10 w-10";
+
+      default:
+        return "h-4 w-4";
+    }
+  };
+
   const getInitials = function (string) {
     var names = string.split(" "),
       initials = names[0].substring(0, 1).toUpperCase();
@@ -17,7 +33,11 @@ export default function AvatarGroup(props) {
   const renderSurplusAvatar = () => {
     if (max < total) {
       return (
-        <div className="flex items-center justify-center text-lg bg-gray-300 text-gray-500 font-semibold h-10 w-10 rounded-full ring-2 ring-white">
+        <div
+          className={`${setSize()}  flex items-center justify-center text-${
+            props.size
+          } bg-gray-300 text-gray-500 font-semibold rounded-full ring-2 ring-white`}
+        >
           +{surplusText}
         </div>
       );
@@ -33,7 +53,7 @@ export default function AvatarGroup(props) {
           if (item.src.length > 0) {
             return (
               <img
-                className="inline-block h-10 w-10 rounded-full ring-2 ring-white"
+                className={`${setSize()} inline-block rounded-full ring-2 ring-white`}
                 src={item.src}
                 alt={item.alt}
                 key={index}
@@ -41,7 +61,11 @@ export default function AvatarGroup(props) {
             );
           } else {
             return (
-              <div className="flex items-center justify-center text-lg bg-gray-300 text-gray-500 font-semibold h-10 w-10 rounded-full ring-2 ring-white">
+              <div
+                className={`${setSize()} flex items-center justify-center text-${
+                  props.size
+                } bg-gray-300 text-gray-500 font-semibold rounded-full ring-2 ring-white`}
+              >
                 {getInitials(item.name)}
               </div>
             );
