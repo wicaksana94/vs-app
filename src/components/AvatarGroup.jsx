@@ -1,4 +1,4 @@
-export default function AvatarGroup(props) {
+function AvatarGroup(props) {
   const max = props.maxLength;
   const total = props.data.total;
   const peopleData = props.data.people.slice(0, max);
@@ -21,12 +21,16 @@ export default function AvatarGroup(props) {
   };
 
   const getInitials = function (string) {
-    var names = string.split(" "),
-      initials = names[0].substring(0, 1).toUpperCase();
+    const names = string.split(" ");
+    const firstName = names[0];
+    let initials = "";
 
-    if (names.length > 1) {
-      initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    if (firstName.length > 2) {
+      initials = `${firstName[0].toUpperCase()}${firstName[2].toUpperCase()}`;
+    } else {
+      initials = firstName.toUpperCase();
     }
+
     return initials;
   };
 
@@ -47,7 +51,7 @@ export default function AvatarGroup(props) {
   };
 
   return (
-    <>
+    <div className="avatar-group">
       <div className="flex -space-x-2 overflow-hidden">
         {peopleData.map((item, index) => {
           if (item.src.length > 0) {
@@ -62,6 +66,7 @@ export default function AvatarGroup(props) {
           } else {
             return (
               <div
+                key={index}
                 className={`${setSize()} flex items-center justify-center text-${
                   props.size
                 } bg-gray-300 text-gray-500 font-semibold rounded-full ring-2 ring-white`}
@@ -73,6 +78,8 @@ export default function AvatarGroup(props) {
         })}
         {renderSurplusAvatar()}
       </div>
-    </>
+    </div>
   );
 }
+
+export default AvatarGroup
